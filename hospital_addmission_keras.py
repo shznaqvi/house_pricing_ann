@@ -9,9 +9,9 @@ df = pd.read_csv('./data/hospital_admissions_2003.csv')
 
 print(df.shape)
 
-# print(df.head())
+print(df.head())
 # print(sys.path)
-# wait = input("PRESS ENTER TO CONTINUE.")
+wait = input("PRESS ENTER TO CONTINUE.")
 
 dataset = df.values
 # print(dataset)
@@ -55,7 +55,7 @@ model.compile(optimizer='sgd',
               loss='binary_crossentropy',
               metrics=['accuracy'])
 
-hist = model.fit(X_train, Y_train, batch_size=32, epochs=100, validation_data=(X_val, Y_val))
+hist = model.fit(X_train, Y_train, batch_size=32, epochs=80, validation_data=(X_val, Y_val))
 
 train_acc = model.evaluate(X_train, Y_train)[1]
 test_acc = model.evaluate(X_test, Y_test)[1]
