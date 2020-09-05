@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 sns.set()
 
 # Import data
-df = pd.read_csv('./data/cancer.csv')
+df = pd.read_csv('data/cancer.csv')
 
 # Get the feel of data
 print(df.head())

@@ -5,7 +5,7 @@ from keras.models import Sequential
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 
-df = pd.read_csv('./data/hospital_admissions_2003.csv')
+df = pd.read_csv('data/hospital_admissions_2003.csv')
 
 print(df.shape)
 
