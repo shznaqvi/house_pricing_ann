@@ -18,8 +18,8 @@ dataset = df.values
 
 X = dataset[:, 0:30]
 Y = dataset[:, 30]
-
-# print(X)
+print("= = = = = ")
+print(Y)
 
 mmScaler = preprocessing.MinMaxScaler()
 X_Scale = mmScaler.fit_transform(X)  # all values to be scaled between 0 and 1

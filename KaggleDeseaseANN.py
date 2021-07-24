@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 from keras import regularizers
-from keras.layers import Dense, Dropout
+from keras.layers import Dense, Dropout, Activation
 from keras.models import Sequential
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
@@ -11,19 +11,19 @@ from sklearn.model_selection import train_test_split
 sns.set()
 
 # Import data
-df = pd.read_csv('data/cancer.csv')
+df = pd.read_csv('data/foo.csv')
 
 # Get the feel of data
 print(df.head())
-wait = input("PRESS ENTER TO CONTINUE.")
+#wait = input("PRESS ENTER TO CONTINUE.")
 print(df.info())
-wait = input("PRESS ENTER TO CONTINUE.")
+#wait = input("PRESS ENTER TO CONTINUE.")
 
 print(df.describe())
-wait = input("PRESS ENTER TO CONTINUE.")
+#wait = input("PRESS ENTER TO CONTINUE.")
 
 print(df.shape)
-wait = input("PRESS ENTER TO CONTINUE.")
+#wait = input("PRESS ENTER TO CONTINUE.")
 
 # df.plot.scatter(x='mean radius', y='mean texture', c='target')
 # plt.show()
@@ -43,8 +43,8 @@ df_sub1 = df
 # sns.pairplot(hue='target', data=df_sub1, height=3)
 # plt.show()
 
-X = df_sub1.drop('target', axis=1).values
-Y = df_sub1['target'].values
+X = df_sub1.drop('Disease', axis=1).values
+Y = df_sub1['Disease'].values
 
 mmScaler = preprocessing.MinMaxScaler()
 X_Scale = mmScaler.fit_transform(X)
@@ -73,14 +73,17 @@ print(X_train.shape)
 print(Y_train.shape)
 
 model = Sequential([
-    Dense(32, activation='relu', input_shape=(10,)),
-# Dropout(0.33),
-    Dense(32, activation='relu'),
-#Dropout(0.33),
-    Dense(1, activation='sigmoid'),
+    Dense(1000, activation='relu', kernel_regularizer=regularizers.l2(0.01), input_shape=(17,)),
+    Dropout(0.3),
+    Dense(1000, activation='relu', kernel_regularizer=regularizers.l2(0.01)),
+    Dropout(0.3),
+    Dense(1000, activation='relu', kernel_regularizer=regularizers.l2(0.01)),
+    Dropout(0.3),
+    Dense(1000, activation='relu', kernel_regularizer=regularizers.l2(0.01)),
+    Dropout(0.3),
+    Dense(1, activation='sigmoid', kernel_regularizer=regularizers.l2(0.01)),
 ])
-
-model.compile(optimizer='sgd',
+model.compile(optimizer='adam',
               loss='binary_crossentropy',
               metrics=['accuracy'])
 
